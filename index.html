@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社JOMON｜採用サイト</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;700;800&display=swap');
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --bg-light: #f8f9fa;
+      --bg-dark: #16213e;
+      --text: #333;
+      --text-light: #fff;
+      --gold: #c9a84c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 0 40px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s;
+    }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 4px;
+    }
+    .logo span { color: var(--accent); }
+
+    nav { display: flex; align-items: center; gap: 0; }
+
+    nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0 16px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    nav a:hover { color: #fff; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 3px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    nav a:hover::after { width: 60%; }
+
+    .nav-entry {
+      background: var(--accent) !important;
+      color: #fff !important;
+      padding: 0 30px !important;
+      font-weight: 700 !important;
+      letter-spacing: 2px !important;
+    }
+    .nav-entry::after { display: none !important; }
+    .nav-entry:hover { background: #d63050 !important; }
+
+    /* ===== HAMBURGER (mobile) ===== */
+    .hamburger { display: none; cursor: pointer; }
+    .hamburger span {
+      display: block; width: 25px; height: 2px;
+      background: #fff; margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--bg-dark) 50%, var(--accent2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(233,69,96,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(15,52,96,0.2) 0%, transparent 50%);
+      animation: heroFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(1deg); }
+      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+    }
+
+    .hero-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 8px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--text-light);
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .scroll-indicator::after {
+      content: '';
+      width: 1px; height: 40px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 120px 0; }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: #666;
+      line-height: 2;
+      max-width: 700px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 50px;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      transition: left 0.3s;
+      z-index: -1;
+    }
+    .btn:hover { color: #fff; }
+    .btn:hover::before { left: 0; }
+
+    .btn-light {
+      border-color: #fff;
+      color: #fff;
+    }
+    .btn-light::before { background: #fff; }
+    .btn-light:hover { color: var(--primary); }
+
+    /* ===== ABOUT / INTRO ===== */
+    .about {
+      background: #fff;
+      text-align: center;
+    }
+    .about .section-desc {
+      margin: 0 auto 50px;
+      font-size: 1.05rem;
+    }
+    .about-text {
+      max-width: 750px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 2.2;
+      color: #555;
+    }
+
+    /* ===== MESSAGE ===== */
+    .message {
+      background: var(--bg-light);
+    }
+    .message-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .message-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--accent2), var(--primary));
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+    }
+    .message-content h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .message-content .role {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 30px;
+    }
+    .message-content p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    /* ===== PHILOSOPHY ===== */
+    .philosophy {
+      background: var(--primary);
+      color: var(--text-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .philosophy::before {
+      content: 'PHILOSOPHY';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12vw;
+      font-weight: 900;
+      color: rgba(255,255,255,0.02);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .philosophy-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 60px;
+    }
+    .philosophy-item {
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    .philosophy-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+    .philosophy-item .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+    .philosophy-item h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    .philosophy-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+    .philosophy-statement {
+      margin-top: 60px;
+      padding: 50px;
+      border-left: 3px solid var(--accent);
+      font-size: 1rem;
+      line-height: 2.2;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== OFFICE ===== */
+    .office {
+      background: #fff;
+    }
+    .office-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .office-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .office-visual .img-block {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 0.8rem;
+    }
+    .office-visual .img-block:first-child {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .office-content h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .office-content p {
+      color: #666;
+      line-height: 2;
+      margin-bottom: 40px;
+    }
+
+    /* ===== CULTURE ===== */
+    .culture {
+      background: var(--bg-light);
+    }
+    .culture-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .culture-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .culture-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .culture-card-img {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .culture-card-body {
+      padding: 30px;
+    }
+    .culture-card-body h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .culture-card-body p {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.8;
+    }
+
+    /* ===== WORKSTYLE & DATA ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .two-col-item {
+      padding: 120px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .two-col-item:first-child {
+      background: var(--accent2);
+      color: #fff;
+    }
+    .two-col-item:last-child {
+      background: var(--primary);
+      color: #fff;
+    }
+    .two-col-item .section-label { color: var(--gold); }
+    .two-col-item .section-title { color: #fff; font-size: 2rem; margin-bottom: 15px; }
+    .two-col-item p { color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+    .two-col-item .btn-light { align-self: flex-start; }
+
+    /* ===== JOBS ===== */
+    .jobs { background: #fff; }
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .job-card {
+      border: 1px solid #eee;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .job-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    }
+    .job-card-header {
+      padding: 25px 25px 15px;
+    }
+    .job-card-header .dept {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .job-card-header h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .job-card-body {
+      padding: 0 25px 25px;
+    }
+    .job-card-body p {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.7;
+    }
+    .job-card-tag {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 4px 12px;
+      background: var(--bg-light);
+      font-size: 0.72rem;
+      color: #666;
+      border-radius: 3px;
+    }
+
+    /* ===== MEDIA / COLUMN ===== */
+    .media-section { background: var(--bg-light); }
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .media-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+    .media-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    }
+    .media-card-img {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #ddd, #ccc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 0.8rem;
+    }
+    .media-card-body {
+      padding: 25px;
+    }
+    .media-card-body .tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .media-card-body .date {
+      font-size: 0.7rem;
+      color: #bbb;
+      margin-bottom: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .media-card-body h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      background: linear-gradient(135deg, var(--primary), var(--accent2));
+      text-align: center;
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-content { position: relative; z-index: 2; }
+    .cta h2 {
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .cta p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 50px;
+      line-height: 2;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0d0d1a;
+      color: rgba(255,255,255,0.5);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+    .footer-brand .logo { font-size: 1.5rem; }
+    .footer-brand p {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    .footer-nav h5 {
+      color: #fff;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .footer-nav a {
+      display: block;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.82rem;
+      padding: 5px 0;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 30px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .message-grid, .office-grid { grid-template-columns: 1fr; gap: 40px; }
+      .philosophy-items { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .two-col-item { padding: 80px 40px; }
+      .jobs-grid, .culture-grid, .media-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      nav { display: none; }
+      .hamburger { display: block; }
+      .hero h1 { font-size: 2rem; }
+      .section-title { font-size: 1.8rem; }
+      .container { padding: 0 20px; }
+      section { padding: 80px 0; }
+      .jobs-grid, .culture-grid, .media-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <a href="#" class="logo">JOMON<span>.</span></a>
+  <nav>
+    <a href="#message">代表メッセージ</a>
+    <a href="#about">会社を知る</a>
+    <a href="#culture">文化を知る</a>
+    <a href="#workstyle">仕事を知る</a>
+    <a href="#data">データで見る</a>
+    <a href="#jobs">募集要項</a>
+    <a href="#media">コラム</a>
+    <a href="#entry" class="nav-entry">ENTRY</a>
+  </nav>
+  <div class="hamburger" onclick="this.classList.toggle('active')">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-sub">A Future Together With Our Willful Colleagues</p>
+    <h1>最高の仲間たちと<br><em>100年続く会社</em>を</h1>
+    <p class="hero-desc">意志ある同志とともに、豊かな未来を。</p>
+  </div>
+  <div class="scroll-indicator">SCROLL</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="container">
+    <p class="section-label">About</p>
+    <h2 class="section-title">意志ある同志とともに、<br>豊かな未来を。</h2>
+    <div class="about-text">
+      <p>日本の未来を明るく照らす、IT技術の力。<br>
+      私たちは、その無限の可能性を信じ、<br>
+      ITソリューションを通じて、日本の発展に貢献してきました。</p>
+      <br>
+      <p>企業や組織の成長を加速させ、<br>
+      人々の生活をより豊かに、便利にすること。<br>
+      それが、私たちの変わらぬ情熱です。</p>
+      <br>
+      <p>ITの力で、日本の社会全体を活性化し、<br>
+      世界に誇れるイノベーションを生み出すこと。<br>
+      私たちは、情熱と挑戦心を持って、<br>
+      お客様とともに、日本の未来を<br>
+      より明るく、より豊かなものへと変えていきます。</p>
+      <br>
+      <p><strong>ITで、日本の可能性を解き放つ。</strong><br>
+      新しい日本の未来を、共に創ります。<br>
+      意志のある仲間達よ。一緒にやろう。</p>
+    </div>
+    <br><br>
+    <a href="#" class="btn">Read More</a>
+  </div>
+</section>
+
+<!-- ===== MESSAGE ===== -->
+<section class="message" id="message">
+  <div class="container">
+    <div class="message-grid">
+      <div class="message-image">CEO</div>
+      <div class="message-content">
+        <p class="section-label">Message</p>
+        <h3>IT技術を活用して<br>未来をクリエイトする</h3>
+        <p class="role">JOMON 代表取締役社長</p>
+        <p>日本の未来は決して楽観視できる状況にはありません。日本には未来を明るく照らすリーダーが必要です。それが私達でありたい。教育業界に留まらず私達は社会に必要な課題を解決するソリューションを先進的な技術で開拓していきます。</p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHILOSOPHY ===== -->
+<section class="philosophy" id="philosophy">
+  <div class="container">
+    <p class="section-label">Philosophy</p>
+    <h2 class="section-title">経営理念</h2>
+    <div class="philosophy-items">
+      <div class="philosophy-item">
+        <p class="num">01</p>
+        <h4>IT技術を活用したサービスの<br>革新を追求すること。</h4>
+        <p>最新のテクノロジーを駆使し、常にサービスの革新に挑戦し続けます。</p>
+      </div>
+      <div class="philosophy-item">
+        <p class="num">02</p>
+        <h4>顧客に求められる<br>サービスを提供すること。</h4>
+        <p>顧客の声に耳を傾け、真に価値あるサービスを創造します。</p>
+      </div>
+      <div class="philosophy-item">
+        <p class="num">03</p>
+        <h4>社会に貢献できる<br>サービスを提供すること。</h4>
+        <p>事業を通じて社会課題を解決し、持続可能な社会の実現に貢献します。</p>
+      </div>
+      <div class="philosophy-item">
+        <p class="num">04</p>
+        <h4>事業活動を通じて社員が<br>心技両面で成長できること。</h4>
+        <p>社員一人ひとりの成長が、会社の成長につながると信じています。</p>
+      </div>
+    </div>
+    <div class="philosophy-statement">
+      私達は、「IT技術」を駆使し、「顧客に求められる」新しい「社会貢献」サービスを、誕生させます。<br><br>
+      日本の未来は決して楽観視できる状況にはありません。日本には未来を明るく照らすリーダーが必要です。それが私達でありたい。<br><br>
+      教育業界に留まらず私達は社会に必要な課題を解決するソリューションを先進的な技術で開拓していきます。そして、その事業活動を通して、「社員が心技両面で成長」し、日本の未来を導くリーダー達の育成を行います。
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFFICE ===== -->
+<section class="office" id="office">
+  <div class="container">
+    <div class="office-grid">
+      <div class="office-visual">
+        <div class="img-block">Office Photo 1</div>
+        <div class="img-block">Office Photo 2</div>
+        <div class="img-block">Office Photo 3</div>
+      </div>
+      <div class="office-content">
+        <p class="section-label">Office</p>
+        <h3>「一流の人財は<br>一流の環境から<br>生まれる」</h3>
+        <p>私達はそう考えています。だから、快適なオフィスや皆で交流できる空間づくりなど、働く環境にもこだわります。一流の環境で一流を目指しましょう。</p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CULTURE ===== -->
+<section class="culture" id="culture">
+  <div class="container">
+    <p class="section-label">Culture</p>
+    <h2 class="section-title">社員ファーストで<br>働きやすい環境を</h2>
+    <p class="section-desc">教育制度や評価制度も充実させ、社員が心身ともにリラックスして働ける文化を醸成。交流会やイベントなども積極的に開催しています。全員で同じ方向を向いて助け合い、切磋琢磨する。それがJOMON流です。</p>
+    <div class="culture-grid">
+      <div class="culture-card">
+        <div class="culture-card-img">WELFARE</div>
+        <div class="culture-card-body">
+          <h4>福利厚生</h4>
+          <p>社員一人ひとりが安心して働ける充実した福利厚生制度を整えています。</p>
+        </div>
+      </div>
+      <div class="culture-card">
+        <div class="culture-card-img">EVENTS</div>
+        <div class="culture-card-body">
+          <h4>社内イベント</h4>
+          <p>部門を超えた交流を促進するイベントや社内レクリエーションを定期的に開催。</p>
+        </div>
+      </div>
+      <div class="culture-card">
+        <div class="culture-card-img">GROWTH</div>
+        <div class="culture-card-body">
+          <h4>教育制度</h4>
+          <p>社員の成長を支援する研修制度やキャリアアップの仕組みが充実しています。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKSTYLE & DATA ===== -->
+<div class="two-col">
+  <div class="two-col-item" id="workstyle">
+    <p class="section-label">Workstyle</p>
+    <h2 class="section-title">仕事を知る</h2>
+    <p>JOMONで活躍する社員のリアルな仕事内容や、働き方をご紹介します。</p>
+    <a href="#" class="btn btn-light">Read More</a>
+  </div>
+  <div class="two-col-item" id="data">
+    <p class="section-label">Data</p>
+    <h2 class="section-title">データで知る</h2>
+    <p>数字で見るJOMON。社員データや会社の成長をわかりやすくご紹介します。</p>
+    <a href="#" class="btn btn-light">Read More</a>
+  </div>
+</div>
+
+<!-- ===== JOBS ===== -->
+<section class="jobs" id="jobs">
+  <div class="container">
+    <p class="section-label">Jobs</p>
+    <h2 class="section-title">募集要項</h2>
+    <div class="jobs-grid">
+      <a href="#" class="job-card">
+        <div class="job-card-header">
+          <p class="dept">社長室 + 新規事業企画室</p>
+          <h4>新規事業責任者候補</h4>
+        </div>
+        <div class="job-card-body">
+          <p>新規事業の「事業責任者」を目指す方大募集！！</p>
+          <span class="job-card-tag">中途採用</span>
+        </div>
+      </a>
+      <a href="#" class="job-card">
+        <div class="job-card-header">
+          <p class="dept">システム開発管理部</p>
+          <h4>SE / プログラマ（自社Webシステム）</h4>
+        </div>
+        <div class="job-card-body">
+          <p>PC、モバイル、タブレットなどを利用した試験専門WEBシステムの開発をしていただきます。</p>
+          <span class="job-card-tag">中途採用</span>
+        </div>
+      </a>
+      <a href="#" class="job-card">
+        <div class="job-card-header">
+          <p class="dept">営業統括本部 - 営業部</p>
+          <h4>事業コンサルティング営業</h4>
+        </div>
+        <div class="job-card-body">
+          <p>DX化に悩みを抱える試験主催者に、試験デジタル化のコンサルティング営業やお客様との窓口業務を行っていただきます。</p>
+          <span class="job-card-tag">中途採用</span>
+        </div>
+      </a>
+    </div>
+    <br><br>
+    <div style="text-align: center;">
+      <a href="#" class="btn">Read More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEDIA / COLUMN ===== -->
+<section class="media-section" id="media">
+  <div class="container">
+    <p class="section-label">Recruitment Media</p>
+    <h2 class="section-title">コラム</h2>
+    <p class="section-desc">JOMONの魅力的な社員達の声や文化・ポリシーなど、様々な記事をお伝えします。是非、入社前にご確認ください。</p>
+    <div class="media-grid">
+      <a href="#" class="media-card">
+        <div class="media-card-img">Interview</div>
+        <div class="media-card-body">
+          <p class="tag">社員インタビュー</p>
+          <p class="date">2025.9.1</p>
+          <h4>数学とAIを駆使し、3年かけて特許取得プロダクトを開発。「システム開発管理部」で唯一無二の価値を発揮。</h4>
+        </div>
+      </a>
+      <a href="#" class="media-card">
+        <div class="media-card-img">Interview</div>
+        <div class="media-card-body">
+          <p class="tag">社員インタビュー</p>
+          <p class="date">2025.9.1</p>
+          <h4>試験運営の課題にコンサルティング型営業でとことん向き合う。「営業部」は裁量を持って働ける場所。</h4>
+        </div>
+      </a>
+      <a href="#" class="media-card">
+        <div class="media-card-img">Interview</div>
+        <div class="media-card-body">
+          <p class="tag">社員インタビュー</p>
+          <p class="date">2025.9.1</p>
+          <h4>社長直下の「新規事業企画室」に配属。挑戦を後押しする環境で新事業を担い、目指すは社長。</h4>
+        </div>
+      </a>
+    </div>
+    <br><br>
+    <div style="text-align: center;">
+      <a href="#" class="btn">Read More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="entry">
+  <div class="cta-content">
+    <h2>最高の仲間と最幸の瞬間を共に。</h2>
+    <p>人生で多くの時間を占める仕事。<br>充実した仕事ができるかは共に働く仲間次第。<br>最高の仲間と最高の仕事をしましょう。</p>
+    <a href="#" class="btn btn-light">Entry</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">JOMON<span>.</span></a>
+        <p>〒101-0022<br>
+        東京都千代田区神田練塀町3<br>
+        AKSビル6階<br><br>
+        Tel：03-5209-0551<br>
+        Fax：03-5209-0552</p>
+      </div>
+      <div class="footer-nav">
+        <h5>Company</h5>
+        <a href="#">代表メッセージ</a>
+        <a href="#">経営理念</a>
+        <a href="#">事業内容</a>
+      </div>
+      <div class="footer-nav">
+        <h5>Culture</h5>
+        <a href="#">オフィス紹介</a>
+        <a href="#">福利厚生</a>
+        <a href="#">社内イベント</a>
+        <a href="#">仕事を知る</a>
+        <a href="#">データで見る</a>
+      </div>
+      <div class="footer-nav">
+        <h5>Recruit</h5>
+        <a href="#">募集要項</a>
+        <a href="#">コラム</a>
+        <a href="#">エントリー</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; JOMON Inc. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
